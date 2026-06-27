@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- GLOBAL BLUR OVERLAY -->
+<div id="blur-overlay" class="blur-overlay">
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search movies & shows..." />
+        <div id="search-results" class="search-results"></div>
+    </div>
+</div>
+
+<!-- BANNER -->
+<div class="banner">
+    <div class="banner-overlay"></div>
+
+    <div class="banner-content">
+        <img id="banner-title-logo" />
+
+        <div class="banner-meta">
+            <span id="banner-rating"></span>
+            <span id="banner-date"></span>
+            <span id="banner-genres"></span>
+        </div>
+
+        <p id="banner-overview"></p>
+
+        <div class="banner-buttons">
+            <button class="watch-btn">Watch Now</button>
+            <button class="see-more-btn">See More</button>
+        </div>
+    </div>
+</div>
+
+<!-- GENRE NAV -->
+<section class="genre-nav-section">
+    <div id="genre-nav" class="genre-nav">
+        <button class="genre-nav-btn active" data-genre="home">Home</button>
+        <button class="genre-nav-btn" data-genre="action">Action</button>
+        <button class="genre-nav-btn" data-genre="drama">Drama</button>
+        <button class="genre-nav-btn" data-genre="comedy">Comedy</button>
+        <button class="genre-nav-btn" data-genre="thriller">Thriller</button>
+        <button class="genre-nav-btn" data-genre="crime">Crime</button>
+        <button class="genre-nav-btn" data-genre="adventure">Adventure</button>
+        <button class="genre-nav-btn" data-genre="family">Family</button>
+        <button class="genre-nav-btn" data-genre="animation">Animation</button>
+        <button class="genre-nav-btn" data-genre="fantasy">Fantasy</button>
+        <button class="genre-nav-btn" data-genre="mystery">Mystery</button>
+        <button class="genre-nav-btn" data-genre="sci-fi">Sci-Fi</button>
+        <button class="genre-nav-btn" data-genre="romance">Romance</button>
+        <button class="genre-nav-btn" data-genre="horror">Horror</button>
+        <button class="genre-nav-btn" data-genre="music">Music</button>
+    </div>
+</section>
+
+<!-- GENRE BROWSER -->
+<section id="genre-browser" class="genre-browser">
+    <h2 id="genre-browser-title">Popular Action Movies</h2>
+    <div id="genre-grid" class="genre-grid"></div>
+
+    <div class="genre-pagination">
+        <button id="prev-page" class="page-btn">Previous Page</button>
+        <button id="next-page" class="page-btn">Next Page</button>
+    </div>
+</section>
+
+<!-- 1. POPULAR THIS WEEK -->
+<section class="content-section">
+    <h2 class="section-title">Popular This Week</h2>
+    <div id="popular-row" class="movie-row"></div>
+</section>
+
+<!-- 2. CONTINUE WATCHING -->
+<section class="content-section" id="continue-section" style="display:none;">
+    <div class="section-header">
+        <h2 class="section-title">Continue Watching</h2>
+        <button id="clear-continue-btn" class="clear-continue-btn">Clear All</button>
+    </div>
+    <div id="continue-row" class="movie-row"></div>
+</section>
+
+<!-- 3. RECOMMENDED -->
+<section class="content-section" id="recommended-section">
+    <h2 class="section-title">Recommended For You</h2>
+    <div id="recommended-row" class="movie-row"></div>
+</section>
+
+<!-- 4. BECAUSE YOU WATCHED (MOST RECENT) -->
+<section class="content-section" id="because-section-1" style="display:none;">
+    <h2 class="section-title" id="because-title-1"></h2>
+    <div id="because-row-1" class="movie-row"></div>
+</section>
+
+<!-- 5. TRENDING NOW -->
+<section class="content-section">
+    <h2 class="section-title">Trending Now</h2>
+    <div id="trending-movies-row" class="movie-row"></div>
+</section>
+
+<!-- 6. GENRE ROW 1 -->
+<section class="content-section">
+    <h2 class="section-title" id="genre-title-1">Genre</h2>
+    <div id="genre-row-1" class="movie-row"></div>
+</section>
+
+<!-- 7. POPULAR IN COUNTRY -->
+<section class="content-section">
+    <h2 class="section-title" id="regional-title">Popular In Your Country</h2>
+    <div id="regional-row" class="movie-row"></div>
+</section>
+
+<!-- 8. BECAUSE YOU WATCHED (2ND MOST RECENT) -->
+<section class="content-section" id="because-section-2" style="display:none;">
+    <h2 class="section-title" id="because-title-2"></h2>
+    <div id="because-row-2" class="movie-row"></div>
+</section>
+
+<!-- 9. GENRE ROW 2 -->
+<section class="content-section">
+    <h2 class="section-title" id="genre-title-2">Genre</h2>
+    <div id="genre-row-2" class="movie-row"></div>
+</section>
+
+<!-- 10. EDITOR'S CHOICE -->
+<section class="content-section">
+    <h2 class="section-title">Editor's Choice</h2>
+    <div id="editors-movies-row" class="movie-row"></div>
+</section>
+
+<!-- 11. LATEST RELEASES -->
+<section class="content-section">
+    <h2 class="section-title">Latest Releases</h2>
+    <div id="latest-releases-row" class="movie-row"></div>
+</section>
+
+<!-- 12. GENRE ROW 3 -->
+<section class="content-section">
+    <h2 class="section-title" id="genre-title-3">Genre</h2>
+    <div id="genre-row-3" class="movie-row"></div>
+</section>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <div class="left">
+        <a href="index.html">
+            <img src="Logos/ViewBox.png" class="logo">
+        </a>
+
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="my-list.html" class="nav-item">My List</a>
+    </div>
+
+    <div class="right">
+        <img src="logos/search.png" class="search-icon">
+
+        <div class="profile-menu">
+            <button class="profile-btn">
+                <img src="logos/profile.png" class="profile-icon">
+            </button>
+
+            <div class="profile-dropdown">
+                <a href="#" class="dropdown-item">Settings</a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item danger">Sign Out</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button id="back-to-top-global" class="back-to-top-global">↑</button>
+
+<!-- SCRIPTS -->
+<script type="module" src="js/banner.js"></script>
+<script src="js/home.js"></script>
+<script src="js/search.js"></script>
+
+</body>
+</html>

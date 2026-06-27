@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- GLOBAL BLUR OVERLAY -->
+<div id="blur-overlay" class="blur-overlay">
+    
+    <div class="search-container">
+
+        <input type="text" class="search-input" placeholder="Search movies & shows..." />
+
+        <div id="search-results" class="search-results"></div>
+
+    </div>
+
+</div>
+
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="left">
+            <a href="index.html">
+                <img src="Logos/ViewBox.png" class="logo">
+            </a>
+
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="my-list.html" class="nav-item">My List</a>
+        </div>
+
+        <div class="right">
+            <img src="logos/search.png" class="search-icon">
+
+            <div class="profile-menu">
+                <button class="profile-btn">
+                    <img src="logos/profile.png" class="profile-icon">
+                </button>
+
+                <div class="profile-dropdown">
+                    <a href="#" class="dropdown-item">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item danger">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER CONTAINER -->
+    <div class="player-container">
+
+        <!-- LEFT SIDE -->
+        <div class="player-content">
+            <div id="player-loading" class="loading">Loading player...</div>
+
+            <div id="player-wrapper" class="player-wrapper" style="display: none;"></div>
+
+            <div class="quick-actions">
+
+                <div class="quick-actions-title">Quick Actions</div>
+
+                <button class="action-btn" id="download-btn">
+                    <img src="logos/download.png" class="btn-icon">
+                    Download
+                </button>
+
+                <button class="action-btn" id="save-btn">
+                    <img src="logos/save.png" class="btn-icon">
+                    Save
+                </button>
+
+                <button class="action-btn" id="refresh-btn">
+                    <img src="logos/refresh.png" class="btn-icon">
+                    Refresh Player
+                </button>
+
+            </div>
+
+            <div id="player-info" class="player-info" style="display: none;">
+
+                <img id="player-poster-img" class="player-poster">
+
+                <div class="player-details">
+                    <div class="player-title" id="player-title"></div>
+
+                    <div class="player-meta">
+                        <span id="player-year"></span>
+                        <span id="player-type"></span>
+                    </div>
+
+                    <div class="player-overview" id="player-overview"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="right-side">
+
+            <!-- WARNING -->
+            <div class="server-warning">
+                ⚠ Servers may not work — try another if playback fails
+            </div>
+
+            <!-- SIDE PANEL -->
+            <div class="side-panel">
+
+                <div class="panel-section">
+                    <div class="panel-subtitle">Premium Servers</div>
+
+                    <div class="panel-item premium">FilmU</div>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-subtitle">Standard Servers</div>
+
+                    <div class="panel-item">VidEasy</div>
+                    <div class="panel-item">VidUp</div>
+                    <div class="panel-item">VidPlus</div>
+                    <div class="panel-item">Vidsrc0</div>
+                    <div class="panel-item">VidNest</div>
+                    <div class="panel-item">VidCore</div>
+                    <div class="panel-item">Vidify</div>
+                    <div class="panel-item">Vidzee</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="movie-info-panel" id="movie-info-panel">
+
+        <img id="info-poster" class="info-poster">
+
+        <div class="info-content">
+
+            <h1 id="info-title"></h1>
+
+            <div class="info-meta" id="info-meta"></div>
+
+            <div class="info-genres" id="info-genres"></div>
+
+            <div class="info-description" id="info-description"></div>
+
+        </div>
+
+    </div>
+
+    <!-- EPISODE SELECTOR (TV ONLY) -->
+    <div id="episode-panel" class="episode-panel" style="display:none;">
+
+        <!-- SEASONS -->
+        <div class="season-section">
+            <div class="episode-title">Seasons</div>
+            <div id="season-list" class="season-list"></div>
+        </div>
+
+        <!-- EPISODES -->
+        <div class="episode-section">
+            <div class="episode-title">Episodes</div>
+            <div id="episode-list" class="episode-list"></div>
+        </div>
+
+    </div>
+
+    <!-- MORE LIKE THIS -->
+    <div id="more-like-this" class="more-like-this-panel">
+
+        <div class="episode-title">More Like This</div>
+
+        <div id="more-like-this-grid" class="more-like-this-grid"></div>
+
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="js/player.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const servers = document.querySelectorAll(".panel-item");
+        const STORAGE_KEY = "selectedServer";
+
+        function normalize(text) {
+            return text.trim().toLowerCase();
+        }
+
+        function setActive(server) {
+            servers.forEach(s => s.classList.remove("active"));
+            server.classList.add("active");
+
+            const name = server.textContent.trim();
+
+            localStorage.setItem(STORAGE_KEY, normalize(name));
+
+            console.log("Selected server:", name);
+        }
+
+        // click handlers
+        servers.forEach(server => {
+            server.addEventListener("click", () => {
+                setActive(server);
+            });
+        });
+
+        // restore saved server
+        const saved = localStorage.getItem(STORAGE_KEY);
+
+        let target = null;
+
+        if (saved) {
+            target = [...servers].find(
+                s => normalize(s.textContent) === saved
+            );
+        }
+
+        // fallback
+        if (!target) {
+            target = [...servers].find(
+                s => normalize(s.textContent) === "filmu"
+            );
+        }
+
+        if (target) setActive(target);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- GLOBAL BLUR OVERLAY -->
+<div id="blur-overlay" class="blur-overlay">
+    
+    <div class="search-container">
+
+        <input type="text" class="search-input" placeholder="Search movies & shows..." />
+
+        <div id="search-results" class="search-results"></div>
+
+    </div>
+
+</div>
+
+<body>
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div class="left">
+
+            <a href="index.html">
+                <img src="Logos/ViewBox.png" class="logo">
+            </a>
+
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="my-list.html" class="nav-item">My List</a>
+
+        </div>
+
+        <div class="right">
+            <img src="logos/search.png" class="search-icon">
+
+            <div class="profile-menu">
+                <button class="profile-btn">
+                    <img src="logos/profile.png" class="profile-icon">
+                </button>
+
+                <div class="profile-dropdown">
+                    <a href="#" class="dropdown-item">Settings</a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item danger">Sign Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MY LIST PAGE -->
+    <div class="mylist-page">
+
+        <div class="mylist-header">
+            <h1>My List</h1>
+            <p>Your saved movies & shows</p>
+        </div>
+
+        <div id="mylist-grid" class="mylist-grid">
+            <!-- JS will inject cards here -->
+        </div>
+
+    </div>
+
+</body>
